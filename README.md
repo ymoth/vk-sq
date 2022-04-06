@@ -3,7 +3,18 @@ VK User-bot: Saint Quarter
 
 Данный юзер-бот написанный на Python с использованием асинхронных фреймворков Quart и VKQuick.
 
-<img src="https://psv4.userapi.com/c237231/u608732541/docs/d54/56f0b77291d8/Snimok_ekrana_2022-04-05_132609.png?extra=7ghzqV4exARBgYvtRORtTZxmuvO5Qt2rKkhReI7Qz2TvUEBMuft-p2waN3nhSmyXCsNlAZOIAVelQEk7PB6RRCAs3WCBv28AnWeak-IS8_3Hcl6yfosqyqMnyKov9TrkuTKTRetyOiICSY7g2jdJHCvC">
+```python
+# Сторона бота
+@default_package.command("ping", "пинг")
+async def test_on(context: vkquick.NewMessage):
+    return f">> Ответ ~{abs(round(time.time() - context.msg.date.timestamp(), 5))} <3"
+
+# Серверная часть. 
+@server.route("/commands")
+async def commands_get():
+    # Обработка кода с командами в самом HTML-документе `commands.html`
+    return await quart.render_template("commands.html", commands=app.commands)
+```
 
 ### Установка
 Windows:
